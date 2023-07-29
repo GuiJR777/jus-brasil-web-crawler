@@ -6,13 +6,13 @@ from services.browser import Browser
 from bs4 import BeautifulSoup
 
 
-FIRST_GRADE_URL = "https://www2.tjal.jus.br/cpopg/show.do?processo.numero={process_number}"  # noqa
-SEARCH_PAGE_URL = "https://www2.tjal.jus.br/cposg5/search.do?conversationId=&paginaConsulta=0&cbPesquisa=NUMPROC&numeroDigitoAnoUnificado={process_id_process_date}&foroNumeroUnificado={court_id}&dePesquisaNuUnificado={process_number}&dePesquisaNuUnificado=UNIFICADO&dePesquisa=&tipoNuProcesso=UNIFICADO"  # noqa
-SECOND_GRADE_URL = "https://www2.tjal.jus.br/cposg5/show.do?processo.codigo={process_code}"  # noqa
+FIRST_GRADE_URL = "https://esaj.tjce.jus.br/cpopg/show.do?processo.numero={process_number}"  # noqa
+SEARCH_PAGE_URL = "https://esaj.tjce.jus.br/cposg5/search.do?conversationId=&paginaConsulta=0&cbPesquisa=NUMPROC&numeroDigitoAnoUnificado={process_id_process_date}&foroNumeroUnificado={court_id}&dePesquisaNuUnificado={process_number}&dePesquisaNuUnificado=UNIFICADO&dePesquisa=&tipoNuProcesso=UNIFICADO"  # noqa
+SECOND_GRADE_URL = "https://esaj.tjce.jus.br/cposg5/show.do?processo.codigo={process_code}"  # noqa
 PARTS = ["Autor", "Ré"]
 
 
-class TribunalJusticaAlagoasCrawler(Crawler):
+class TribunalJusticaCearaCrawler(Crawler):
     def __init__(self, process_number: ProcessNumber) -> None:
         self.__process_number = process_number
         self.__browser = Browser()

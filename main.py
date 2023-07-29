@@ -1,5 +1,5 @@
 import uvicorn
-from services.api import ConsultApi
+from views.api import ConsultApi
 
 
 api_app = ConsultApi().app
