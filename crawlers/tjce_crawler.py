@@ -1,3 +1,5 @@
+import re
+
 from crawlers.base_crawler import Crawler
 from crawlers.extractor import Extractor
 from models.process import Process
@@ -36,7 +38,16 @@ class TribunalJusticaCearaCrawler(Crawler):
 
         bf_soup = BeautifulSoup(search_page, "html.parser")
 
-        process_code = bf_soup.find(id="processoSelecionado").get("value")
+        process_code = bf_soup.find(id="processoSelecionado")
+
+        if process_code:
+            process_code = process_code.get("value")
+        else:
+            pattern = re.compile(r'P00\w{10}')
+            found_code = pattern.search(search_page)
+
+            if found_code:
+                process_code = found_code.group(0)
 
         second_grade_url = SECOND_GRADE_URL.format(
             process_code=process_code

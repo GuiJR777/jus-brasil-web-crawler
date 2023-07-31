@@ -16,7 +16,7 @@ class Browser:
 
                 print(
                     "Error while getting page data",
-                    f"status code: {response.status_code}"
+                    f"status code: {response.status_code}",
                 )
                 print("Retrying...")
                 sleep(randint(1, 3))

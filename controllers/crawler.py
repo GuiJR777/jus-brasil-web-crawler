@@ -30,15 +30,15 @@ class CrawlersController:
                 response.message = "first grade page data not found"
                 return response
 
-            first_grade_process_data = self.__crawler.extract_data_from_page(
-                first_grade_page_data)
-
             second_grade_page_data = self.__crawler.get_second_grade_page_data()  # noqa
 
             if not second_grade_page_data:
                 response.status = "error"
                 response.message = "second grade page data not found"
                 return response
+
+            first_grade_process_data = self.__crawler.extract_data_from_page(
+                first_grade_page_data)
 
             second_grade_process_data = self.__crawler.extract_data_from_page(
                 second_grade_page_data)

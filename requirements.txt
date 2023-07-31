@@ -3,4 +3,6 @@ fastapi==0.100.1
 python-dotenv==1.0.0
 redis==4.6.0
 requests==2.31.0
+urllib3==1.26.12
 uvicorn==0.23.1
+ws4py

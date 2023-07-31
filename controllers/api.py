@@ -2,11 +2,9 @@ import json
 
 from configs import REDIS_PASS, REDIS_PORT, REDIS_TTL, REDIS_URL
 from controllers.crawler import CrawlersController
-
 from models.consult import Consult
 from models.process_number import ProcessNumber
 from models.response import ApiResponse
-
 from services.cache import RedisCache
 
 
@@ -15,7 +13,7 @@ class ApiController:
         self.__cache = RedisCache(REDIS_URL, REDIS_PASS, REDIS_PORT)
         self.__crawlers = CrawlersController()
 
-    def health_check() -> ApiResponse:
+    def health_check(self) -> ApiResponse:
         return ApiResponse(
             status="ok",
             message="Everything is fine"
@@ -26,8 +24,8 @@ class ApiController:
         cached_data = self.__cache.get(consult_data.numero_processo)
 
         if cached_data:
+            response.data = json.loads(cached_data).get("data")
             response.message = "data from cache"
-            response.data = json.loads(cached_data)
 
             return response
 
@@ -43,8 +41,8 @@ class ApiController:
                     ttl=REDIS_TTL,
                 )
 
+                response = process_data
                 response.message = "data crawled"
-                response.data = f"{process_data}"
 
         except Exception as exception:
             response.status = "error"
