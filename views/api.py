@@ -6,8 +6,8 @@ from models.response import ApiResponse
 
 
 class ConsultApi:
-    def __init__(self) -> None:
-        self.__controller = ApiController()
+    def __init__(self, cache_service, crawlers_controller) -> None:
+        self.__controller = ApiController(cache_service, crawlers_controller)
         self.__app = FastAPI()
 
         self.__create_routes()

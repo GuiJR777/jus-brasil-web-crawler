@@ -1,17 +1,15 @@
 import json
 
-from configs import REDIS_PASS, REDIS_PORT, REDIS_TTL, REDIS_URL
-from controllers.crawler import CrawlersController
+from configs import REDIS_TTL
 from models.consult import Consult
 from models.process_number import ProcessNumber
 from models.response import ApiResponse
-from services.cache import RedisCache
 
 
 class ApiController:
-    def __init__(self) -> None:
-        self.__cache = RedisCache(REDIS_URL, REDIS_PASS, REDIS_PORT)
-        self.__crawlers = CrawlersController()
+    def __init__(self, cache_service, crawlers_controller) -> None:
+        self.__cache = cache_service
+        self.__crawlers = crawlers_controller
 
     def health_check(self) -> ApiResponse:
         return ApiResponse(
