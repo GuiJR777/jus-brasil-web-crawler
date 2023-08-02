@@ -18,7 +18,7 @@ class ConsultApi:
 
     def __create_routes(self) -> None:
         @self.app.get("/status")
-        def health_check() -> dict[str, str]:
+        def health_check() -> ApiResponse:
             return self.__controller.health_check()
 
         @self.app.post("/consult")
