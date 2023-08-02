@@ -17,8 +17,13 @@ class CrawlersController:
         self.__crawler: Crawler = None
 
     def set_crawler(self, process_number: ProcessNumber) -> None:
-        self.__crawler = AVAILABLE_CRAWLERS[
+        crawler_to_use = AVAILABLE_CRAWLERS[
             process_number.judiciary_segment](process_number)
+
+        if not crawler_to_use:
+            raise Exception("Crawler not implemented")
+
+        self.__crawler = crawler_to_use
 
     def get_data_from_web(self) -> ApiResponse:
         response = ApiResponse()
@@ -56,6 +61,6 @@ class CrawlersController:
 
         except Exception as exception:
             response.status = "error"
-            response.message = f"{exception}"
+            response.message = f"Error in extract data: {exception}"
 
         return response

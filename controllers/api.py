@@ -49,7 +49,11 @@ class ApiController:
         return response
 
     def __get_process_data(self, process_number: ProcessNumber) -> ApiResponse:
-        self.__crawlers.set_crawler(process_number)
-        data = self.__crawlers.get_data_from_web()
+        try:
+            self.__crawlers.set_crawler(process_number)
+            data = self.__crawlers.get_data_from_web()
+
+        except Exception as exception:
+            raise Exception(f"{exception}")
 
         return data
